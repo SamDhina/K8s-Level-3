@@ -35,6 +35,45 @@ samdhina_x11@cloudshell:~/charts/stable/jenkins (smooth-loop-245005)$
 ------------------------------------------------------------------------------------------------------------------------
 3.	Create a namespace and deploy the mediawiki application (or any other application which you think is more suitable to showcase your ability, kindly justify why you have chosen a different application) on the cluster. 
 
+samdhina_x11@cloudshell:~ (smooth-loop-245005)$ helm install --name my-release stable/mediawiki --namespace=app
+NAME:   my-release
+LAST DEPLOYED: Mon Jul 22 09:11:46 2019
+NAMESPACE: app
+STATUS: DEPLOYED
+
+RESOURCES:
+==> v1/ConfigMap
+NAME                      DATA  AGE
+my-release-mariadb        1     1s
+my-release-mariadb-tests  1     1s
+
+==> v1/PersistentVolumeClaim
+NAME                            STATUS   VOLUME    CAPACITY  ACCESS MODES  STORAGECLASS  AGE
+my-release-mediawiki-mediawiki  Pending  standard  1s
+
+==> v1/Pod(related)
+NAME                                  READY  STATUS   RESTARTS  AGE
+my-release-mariadb-0                  0/1    Pending  0         0s
+my-release-mediawiki-8d786d8f4-xgqsc  0/1    Pending  0         1s
+
+==> v1/Secret
+NAME                  TYPE    DATA  AGE
+my-release-mariadb    Opaque  2     1s
+my-release-mediawiki  Opaque  1     1s
+
+==> v1/Service
+NAME                  TYPE          CLUSTER-IP   EXTERNAL-IP  PORT(S)                     AGE
+my-release-mariadb    ClusterIP     10.0.229.41  <none>       3306/TCP                    1s
+my-release-mediawiki  LoadBalancer  10.0.193.7   <pending>    80:30059/TCP,443:30261/TCP  1s
+
+==> v1beta1/Deployment
+NAME                  READY  UP-TO-DATE  AVAILABLE  AGE
+my-release-mediawiki  0/1    1           0          1s
+
+==> v1beta1/StatefulSet
+NAME                READY  AGE
+my-release-mariadb  0/1    1s
+
 samdhina_x11@cloudshell:~ (smooth-loop-245005)$ kubectl get pods -n app
 NAME                                   READY   STATUS    RESTARTS   AGE
 my-release-mariadb-0                   1/1     Running   0          171m
